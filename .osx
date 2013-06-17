@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ~/.osx — http://mths.be/osx
 
@@ -18,6 +18,9 @@ sudo scutil --set HostName "MathBook Pro"
 sudo scutil --set LocalHostName "MathBook-Pro"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "MathBook-Pro"
 
+# Set standby delay to 24 hours (default is 1 hour)
+sudo pmset -a standbydelay 86400
+
 # Menu bar: disable transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
@@ -28,7 +31,7 @@ defaults write com.apple.menuextra.battery ShowTime -string "YES"
 # Menu bar: hide the useless Time Machine and Volume icons
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
-# Set highlight color to orange
+# Set highlight color to green
 defaults write NSGlobalDomain AppleHighlightColor -string '0.764700 0.976500 0.568600'
 
 # Set sidebar icon size to medium
@@ -36,6 +39,7 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+# Possible values: `WhenScrolling`, `Automatic` and `Always`
 
 # Disable smooth scrolling
 # (Uncomment if you’re on an older Mac that messes up the animation)
@@ -215,7 +219,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 
 # Finder: show path bar
-defaults write com.apple.finder ShowPathBar -bool true
+defaults write com.apple.finder ShowPathbar -bool true
 
 # Finder: allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
@@ -291,9 +295,8 @@ sudo nvram boot-args="mbasd=1"
 chflags nohidden ~/Library
 
 # Remove Dropbox’s green checkmark icons in Finder
-file=/Applications/Dropbox.app/Contents/Resources/check.icns
+file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
 [ -e "$file" ] && mv -f "$file" "$file.bak"
-unset file
 
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
@@ -326,11 +329,14 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 # (i.e. use the old Exposé behavior instead)
 defaults write com.apple.dock expose-group-by-app -bool false
 
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -bool true
+
 # Don’t show Dashboard as a Space
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
-# Disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -bool true
+# Don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
 
 # Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0
