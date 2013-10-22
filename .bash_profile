@@ -1,3 +1,4 @@
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH"
 
