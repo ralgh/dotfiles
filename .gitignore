@@ -18,3 +18,6 @@ node_modules
 
 # SASS
 .sass_cache
+
+# VS Code
+.vscode
